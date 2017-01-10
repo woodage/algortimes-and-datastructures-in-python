@@ -1,22 +1,25 @@
 __author__ = 'robbie'
 
-class mystack:
+class mystack(list):
 
     def __init__(self):
-        self.stack = []
+        self = []
 
     def push(self, c):
-        self.stack.append(c)
-
-    def pop(self):
-        self.stack.pop()
+        self.append(c)
 
     def peek(self):
-        i = len(self.stack) - 1
-        return self.stack[i]
+        i = len(self) - 1
+        return self[i]
 
     def isEmpty(self):
-        if not self.stack:
-            return True
+       return len(self) == 0
 
-        return False
+
+stack = mystack()
+stack.append(3)
+stack.append(5)
+stack.pop()
+
+print(stack.peek())
+print(stack)

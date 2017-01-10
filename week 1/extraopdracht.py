@@ -2,7 +2,6 @@ __author__ = 'robbie'
 
 
 def next_las_seq(x):
-
     #sort array first
     x.sort()
     #unique list of all elements in the array

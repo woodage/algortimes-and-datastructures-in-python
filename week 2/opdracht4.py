@@ -1,16 +1,12 @@
 __author__ = 'robbie'
 
-def mybin(dec, res = ''):
+def mybin(dec):
+    assert dec > 0
+    if dec <= 1:
+        return str(dec)
+    else:
+        s1 = mybin(dec // 2)
+        s2 = str(dec % 2)
+        return s1 + s2
 
-    #check
-    if dec <= 0:
-        return res
-
-    #operation
-    new_res = (str)(dec % 2) + res
-
-    #repeat
-    return mybin((int)(dec / 2), new_res)
-
-
-print(mybin(15))
+print(mybin(16))
