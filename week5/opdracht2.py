@@ -52,6 +52,25 @@ def BFS(G, s):
                 n.predecessor = u
                 q.enqueue(n)
 
+def path_BFS(G,u,v):
+    BFS(G,u)
+    a = []
+    if hasattr(v,'predecessor'):
+        current = v
+        while current:
+            a.append(current)
+            current = current.predecessor
+        a.reverse()
+    clear(G)
+    return a
+
+def clear(G): # verwijder alle toegevoegde attributen van de nodes
+    for v in vertices(G):
+        k = [e for e in vars(v) if e != 'data']
+        for e in k:
+            delattr(v,e)
+
+
 def show_tree_info(G):
     print('tree:')
     for v in vertices(G):
@@ -63,24 +82,20 @@ def show_tree_info(G):
         print(')')
     print()
 
-def path_BFS(G,u,v):
-    BFS(G,u)
-    a = []
-    if hasattr(v,'predecessor'):
-        current = v
-        while current:
-            a.append(current)
-            current = current.predecessor
-        a.reverse()
-    return a
-
 def no_cycles(G):
+    for k,j in G.items():
+        if len(j) >= 2:
+            for n in j:
+                Gc = G
+                Gc[n].remove(k)
+                Gc[k].remove(n)
+                if len(path_BFS(Gc, k, n)):
+                    return True
     return False
 
 v = [Vertex(i) for i in range(8)]
+upperG = {v[0]:[v[4],v[5]], v[1]:[v[4],v[5],v[6]], v[2]:[v[4],v[5],v[6]], v[4]:[v[0], v[1], v[2], v[5]], v[5]:[v[0],v[1],v[2], v[4]], v[6]:[v[1],v[2]], }
+downG = {v[0]:[v[4],v[5]], v[1]:[v[4],v[6]], v[2]:[v[5]], v[3]:[v[7]], v[4]:[v[0], v[1]], v[5]:[v[0],v[2]], v[6]:[v[1]], v[7]:[v[3]],}
 
-G = {v[0]:[v[4],v[5]], v[1]:[v[4],v[5],v[6]], v[2]:[v[4],v[5],v[6]], v[3]:[v[7]], v[4]:[v[0], v[1], v[5]], v[5]:[v[0],v[1],v[2]], v[6]:[v[1],v[2]], v[7]:[v[3]]}
-G2 = {v[0]:[v[4],v[5]], v[1]:[v[4],v[5],v[6]], v[2]:[v[4],v[5],v[6]], v[4]:[v[0], v[1], v[5]], v[5]:[v[0],v[1],v[2]], v[6]:[v[1],v[2]], }
-
-BFS(G, v[0])
-BFS(G2, v[0]
+print(no_cycles(upperG))
+print(no_cycles(downG))

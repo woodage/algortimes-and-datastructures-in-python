@@ -46,6 +46,8 @@ def BFS(G, s):
     q.enqueue(s)
     while q.isEmpty() is False:
         u = q.dequeue()
+
+
         for n in G[u]:
             if n.distance == INFINITY:
                 n.distance = u.distance + 1
@@ -70,7 +72,6 @@ def is_connected(G):
                 return False
         else:
             return False
-
     return True
 
 v = [Vertex(i) for i in range(8)]
@@ -78,7 +79,11 @@ v = [Vertex(i) for i in range(8)]
 G = {v[0]:[v[4],v[5]], v[1]:[v[4],v[5],v[6]], v[2]:[v[4],v[5],v[6]], v[3]:[v[7]], v[4]:[v[0], v[1], v[5]], v[5]:[v[0],v[1],v[2]], v[6]:[v[1],v[2]], v[7]:[v[3]]}
 G2 = {v[0]:[v[4],v[5]], v[1]:[v[4],v[5],v[6]], v[2]:[v[4],v[5],v[6]], v[4]:[v[0], v[1], v[5]], v[5]:[v[0],v[1],v[2]], v[6]:[v[1],v[2]], }
 
+testG = {v[1]: [v[2]], v[7]: [v[6]], v[2]:[v[1], v[3], v[4]], v[3]: [v[0], v[2]], v[6]: [v[4], v[5], v[7]], v[0]: [v[3]], v[4]: [v[2], v[5], v[6]], v[5]: [v[4], v[6]], }
+
 BFS(G, v[0])
 BFS(G2, v[0])
+BFS(testG, v[0])
 print(is_connected(G))
 print(is_connected(G2))
+print(is_connected(testG))

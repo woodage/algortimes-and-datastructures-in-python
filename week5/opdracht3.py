@@ -118,20 +118,25 @@ def no_cycles(G):
                     return True
     return False
 
-def get_bridges(G):
+def get_bridges(G,v):
     r = []
     for k,j in G.items():
         for n in j:
             Gc = G
             Gc[n].remove(k)
             Gc[k].remove(n)
+            BFS(Gc, v)
             if is_connected(Gc) is False:
-                r.append((k,n))
-                r.append((n,k))
+                if (k,n) not in r:
+                    r.append((k,n))
+                    r.append((n,k))
+            Gc[n].append(k)
+            Gc[k].append(n)
     return r
 
 v = [Vertex(i) for i in range(8)]
 G = {v[0]:[v[1],v[3]], v[1]:[v[0],v[2]], v[2]:[v[1],v[3],v[4]], v[3]:[v[0], v[2]], v[4]:[v[2], v[5], v[6]], v[5]:[v[4],v[6]], v[6]: [v[4], v[5], v[7]], v[7] : [v[6]] }
 
+
 BFS(G, v[0])
-print(get_bridges(G))
+print(get_bridges(G,v[0]))
