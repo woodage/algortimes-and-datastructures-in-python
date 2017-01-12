@@ -102,7 +102,6 @@ def is_connected(G):
     for v in vertices(G):
         if hasattr(v, 'distance'):
             if v.distance == INFINITY:
-
                 return False
         else:
             return False
@@ -134,5 +133,5 @@ def get_bridges(G):
 v = [Vertex(i) for i in range(8)]
 G = {v[0]:[v[1],v[3]], v[1]:[v[0],v[2]], v[2]:[v[1],v[3],v[4]], v[3]:[v[0], v[2]], v[4]:[v[2], v[5], v[6]], v[5]:[v[4],v[6]], v[6]: [v[4], v[5], v[7]], v[7] : [v[6]] }
 
-
+BFS(G, v[0])
 print(get_bridges(G))
