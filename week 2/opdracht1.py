@@ -1,16 +1,18 @@
 __author__ = 'robbie'
 
-
-def machtv3(a,n):
+def machtv3(a, n):
     assert n > 0
+    x = 0
     m = 1
-    square = a * a
     while n > 0:
-        if n%2 == 0:
-            n = n // 2
+        if n % 2 == 0:
+            a *= a
+            x += 1
+            n /= 2
         else:
-            n = n - 1
-        m += square * square
-    return m
-print(machtv3(2, 1))
-#AFMAKEN!!!
+            m *= a
+            n -= 1
+            x += 1
+    return x
+
+print(machtv3(2, 10000))
